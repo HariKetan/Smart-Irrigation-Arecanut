@@ -11,7 +11,7 @@ import {
   BarChart,
   LogOut
 } from "lucide-react"
-import { useSidebar } from "@/components/ui/sidebar"
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
 import { useAuth } from "@/contexts/AuthContext"
 import { Button } from "@/components/ui/button"
 
@@ -59,6 +59,7 @@ export function AppSidebar() {
             Dashboard
           </span>
         </Link> */}
+        <SidebarTrigger className="-ml-1" />
       </div>
       <div className="flex-1 overflow-auto py-2">
         <nav className="grid items-start px-2 text-sm font-medium">
@@ -81,19 +82,7 @@ export function AppSidebar() {
           })}
         </nav>
       </div>
-      <div className="mt-auto border-t p-4">
-        <Button
-          variant="ghost"
-          className={cn(
-            "w-full justify-start gap-3",
-            isCollapsed && "justify-center"
-          )}
-          onClick={logout}
-        >
-          <LogOut className="h-4 w-4" />
-          {!isCollapsed && <span>Logout</span>}
-        </Button>
-      </div>
+      
     </div>
   )
 }

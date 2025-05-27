@@ -14,12 +14,17 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { ThemeToggle } from "./ThemeToggle"
 
-export function DashboardNavbar() {
+interface DashboardHeaderProps {
+  userName?: string
+  userEmail?: string
+}
+
+export function DashboardNavbar({ userName, userEmail }: DashboardHeaderProps) {
   const { logout } = useAuth()
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-17 items-center px-4 w-full">
+      <div className="flex h-15 items-center px-4 w-full">
         <div className="mr-4 flex">
           <Link href="/dashboard" className="mr-6 flex items-center space-x-2">
             <span className="font-bold">Your Logo</span>
@@ -34,7 +39,7 @@ export function DashboardNavbar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{userName || userEmail}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
@@ -46,6 +51,7 @@ export function DashboardNavbar() {
         <div className="ml-auto flex items-center space-x-4">
           <ThemeToggle />
         </div>
+        
       </div>
     </nav>
   )
