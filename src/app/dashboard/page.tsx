@@ -108,7 +108,7 @@ export default function DashboardPage() {
     <DashboardLayout>
       {/* <DashboardHeader userName={user?.name} userEmail={user?.email} /> */}
       <div className="flex flex-1 flex-col gap-4 p-4 pt-4">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+        <div className="grid auto-rows-min gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full">
           {sections.map((section) => (
             <SectionCard
               key={section.id}
@@ -119,7 +119,7 @@ export default function DashboardPage() {
             />
           ))}
         </div>
-    </div>
+      </div>
     </DashboardLayout>
   );
-} 
+}
