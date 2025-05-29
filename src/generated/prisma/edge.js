@@ -162,7 +162,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/hariketan/Music/nextjs-shadcn-login/src/generated/prisma",
+      "value": "/home/hariketan/Music/Smart-Irrigation-Arecanut/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -176,12 +176,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/hariketan/Music/nextjs-shadcn-login/prisma/schema.prisma",
+    "sourceFilePath": "/home/hariketan/Music/Smart-Irrigation-Arecanut/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.8.1",
@@ -190,7 +189,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {

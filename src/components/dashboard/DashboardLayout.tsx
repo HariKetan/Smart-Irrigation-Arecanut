@@ -2,6 +2,7 @@
 
 import { AppSidebar } from "@/components/dashboard/app-sidebar"
 import { SidebarInset, SidebarProvider, useSidebar } from "@/components/ui/sidebar"
+import { DashboardNavbar } from "./DashboardNavbar"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -19,6 +20,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
   const { isCollapsed } = useSidebar();
   return (
     <div className="w-full">
+      <DashboardNavbar />
       <div className="fixed left-0 top-15 z-40 h-screen">
         <AppSidebar />
       </div>

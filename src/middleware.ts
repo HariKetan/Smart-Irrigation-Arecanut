@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 // Add paths that should be protected
-const protectedPaths = ["/dashboard"]
+const protectedPaths = ["/dashboard", "/analytics"]
 // Add paths that should be accessible only to non-authenticated users
 const authPaths = ["/login", "/register"]
 

@@ -1,3 +1,12 @@
+// import React from 'react'
+
+// const page = () => {
+//   return (
+//     <div>page</div>
+//   )
+// }
+
+// export default page
 // "use client";
 
 // import { useEffect, useState } from "react";
@@ -76,6 +85,7 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Droplets, Gauge, AlertTriangle, Power, MapPin, ChevronRight, Activity, Thermometer } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 // Mock data for demonstration
 const farmSections = [
@@ -129,11 +139,8 @@ const farmSections = [
   },
 ]
 
-interface DashboardProps {
-  onSectionSelect: (sectionId: number) => void
-}
-
-export default function Dashboard({ onSectionSelect }: DashboardProps) {
+export default function Dashboard() {
+  const router = useRouter()
   const [sections, setSections] = useState(farmSections)
   const [totalWaterUsed, setTotalWaterUsed] = useState(0)
   const [activeValves, setActiveValves] = useState(0)
@@ -150,6 +157,10 @@ export default function Dashboard({ onSectionSelect }: DashboardProps) {
       return { status: "Critical", color: "destructive", bgColor: "bg-red-50 border-red-200" }
     if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-orange-50 border-orange-200" }
     return { status: "Optimal", color: "default", bgColor: "bg-green-50 border-green-200" }
+  }
+
+  const handleSectionSelect = (sectionId: number) => {
+    router.push(`/dashboard/sections/${sectionId}`)
   }
 
   return (
@@ -228,7 +239,7 @@ export default function Dashboard({ onSectionSelect }: DashboardProps) {
                 <Card
                   key={section.id}
                   className={`${moistureStatus.bgColor} transition-all duration-200 cursor-pointer hover:shadow-md`}
-                  onClick={() => onSectionSelect(section.id)}
+                  onClick={() => handleSectionSelect(section.id)}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
