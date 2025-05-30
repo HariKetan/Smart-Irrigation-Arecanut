@@ -169,20 +169,20 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
         {/* Main Status Card */}
         <Card className={`${moistureStatus.bgColor} transition-all duration-200`}>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Gauge className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2 dark:text-black">
+              <Gauge className="h-5 w-5 dark:text-black" />
               Current Status
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Moisture Level - Prominent */}
             <div className="space-y-3">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center dark:text-black">
                 <span className="text-lg font-medium">Soil Moisture</span>
                 <span className="text-3xl font-bold">{currentSection.moisture}%</span>
               </div>
-              <Progress value={currentSection.moisture} className="h-4" />
-              <div className="flex justify-between text-sm text-muted-foreground">
+              <Progress value={currentSection.moisture} className="h-4 dark:text-black" />
+              <div className="flex justify-between text-sm text-muted-foreground dark:text-black">
                 <span>Target: {currentSection.threshold}%</span>
                 <span className={currentSection.moisture < currentSection.threshold ? "text-red-600 font-medium" : ""}>
                   {currentSection.moisture < currentSection.threshold

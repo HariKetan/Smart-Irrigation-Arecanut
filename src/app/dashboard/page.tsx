@@ -114,23 +114,23 @@ export default function DashboardPage() {
               return (
                 <Card
                   key={section.id}
-                  className={`${moistureStatus.bgColor} transition-all duration-200 cursor-pointer hover:shadow-md`}
+                  className={`${moistureStatus.bgColor} transition-all duration-200 cursor-pointer hover:shadow-md dark:${moistureStatus.bgColor}`}
                   onClick={() => handleSectionSelect(section.id)}
                 >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
+                        <MapPin className="h-4 w-4 text-black dark:text-black" />
                         <div>
-                          <CardTitle className="text-base md:text-lg">{section.name}</CardTitle>
-                          <CardDescription className="text-sm">{section.crop}</CardDescription>
+                          <CardTitle className="text-base md:text-lg text-black dark:text-black">{section.name}</CardTitle>
+                          <CardDescription className="text-sm text-black dark:text-black">{section.crop}</CardDescription>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Badge variant={moistureStatus.color as any} className="text-xs">
+                        <Badge variant={moistureStatus.color as any} className="text-xs ">
                           {moistureStatus.status}
                         </Badge>
-                        <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                        <ChevronRight className="h-4 w-4 text-black dark:text-black" />
                       </div>
                     </div>
                   </CardHeader>
@@ -138,12 +138,12 @@ export default function DashboardPage() {
                   <CardContent className="pt-0 space-y-3">
                     {/* Moisture Level */}
                     <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm text-black dark:text-black">
                         <span>Soil Moisture</span>
                         <span className="font-bold">{section.moisture}%</span>
                       </div>
                       <Progress value={section.moisture} className="h-2" />
-                      <div className="text-xs text-muted-foreground">
+                      <div className="text-xs text-muted-foreground dark:text-black">
                         Target: {section.threshold}% •{" "}
                         {section.moisture < section.threshold
                           ? `${section.threshold - section.moisture}% below target`
@@ -155,37 +155,37 @@ export default function DashboardPage() {
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div className="space-y-1">
                         <div className="flex items-center justify-center gap-1">
-                          <Thermometer className="h-3 w-3" />
-                          <span className="text-xs text-muted-foreground">Temp</span>
+                          <Thermometer className="h-3 w-3 text-orange-500 dark:text-orange-500" />
+                          <span className="text-xs text-black dark:text-black">Temp</span>
                         </div>
-                        <div className="text-sm font-medium">{section.temperature}°C</div>
+                        <div className="text-sm font-medium text-black dark:text-black">{section.temperature}°C</div>
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center justify-center gap-1">
-                          <Droplets className="h-3 w-3" />
-                          <span className="text-xs text-muted-foreground">Used</span>
+                          <Droplets className="h-3 w-3 text-blue-500 dark:text-blue-500" />
+                          <span className="text-xs text-black dark:text-black">Used</span>
                         </div>
-                        <div className="text-sm font-medium">{formatNumber(section.waterUsed)}L</div>
+                        <div className="text-sm font-medium text-black dark:text-black">{formatNumber(section.waterUsed)}L</div>
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center justify-center gap-1">
-                          <Activity className="h-3 w-3" />
-                          <span className="text-xs text-muted-foreground">Status</span>
+                          <Activity className="h-3 w-3 text-green-500 dark:text-green-500" />
+                          <span className="text-xs text-black dark:text-black">Status</span>
                         </div>
                         <div className="flex items-center justify-center gap-1">
                           <div
-                            className={`w-2 h-2 rounded-full ${section.valveOpen ? "bg-green-500" : "bg-gray-400"}`}
+                            className={`w-2 h-2 rounded-full ${section.valveOpen ? "bg-green-500 dark:bg-green-500" : "bg-gray-400 dark:bg-gray-400"}`}
                           ></div>
-                          <span className="text-xs">{section.valveOpen ? "ON" : "OFF"}</span>
+                          <span className="text-xs text-black dark:text-black">{section.valveOpen ? "ON" : "OFF"}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Alert if needed */}
                     {section.moisture < section.threshold && (
-                      <div className="flex items-center gap-2 p-2 bg-orange-100 border border-orange-200 rounded-lg">
-                        <AlertTriangle className="h-3 w-3 text-orange-600" />
-                        <span className="text-xs text-orange-700">Needs immediate attention</span>
+                      <div className="flex items-center gap-2 p-2 bg-orange-100 border border-orange-200 rounded-lg dark:bg-orange-100 dark:border-orange-200">
+                        <AlertTriangle className="h-3 w-3 text-orange-600 dark:text-orange-600" />
+                        <span className="text-xs text-orange-700 dark:text-orange-700">Needs immediate attention</span>
                       </div>
                     )}
                   </CardContent>
