@@ -1,6 +1,26 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { MoistureStatus } from "@/types"
+import { MOISTURE_STATUS_THRESHOLDS, MOISTURE_STATUS_STYLES } from "./constants"
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+export function cn(...classes: (string | undefined | null | false)[]) {
+  return classes.filter(Boolean).join(" ")
+}
+
+export const getMoistureStatus = (moisture: number, threshold: number) => {
+  if (moisture < threshold - 10)
+    return { status: "Critical", color: "destructive", bgColor: "bg-red-50 border-red-200" }
+  if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-orange-50 border-orange-200" }
+  return { status: "Optimal", color: "default", bgColor: "bg-green-50 border-green-200" }
+}
+
+export const calculateAverage = (numbers: number[]): number => {
+  if (numbers.length === 0) return 0
+  return Math.round(numbers.reduce((sum, num) => sum + num, 0) / numbers.length)
+}
+
+export const formatNumber = (num: number): string => {
+  return num.toLocaleString()
+}
+
+export function formatDate(date: string): string {
+  return new Date(date).toLocaleDateString()
 }

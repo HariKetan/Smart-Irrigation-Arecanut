@@ -1,82 +1,3 @@
-// import React from 'react'
-
-// const page = () => {
-//   return (
-//     <div>page</div>
-//   )
-// }
-
-// export default page
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation";
-// import { Alert, AlertDescription } from "@/components/ui/alert";
-// import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
-// import { AppSidebar } from "@/components/dashboard/app-sidebar";
-// // import SectionCard from "@/components/dashboard/SectionCard";
-
-
-// interface User {
-//   email: string;
-//   name?: string;
-//   role?: string;
-// }
-
-// export default function DashboardPage() {
-//   const router = useRouter();
-//   const [user, setUser] = useState<User | null>(null);
-//   const [error, setError] = useState<string | null>(null);
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   useEffect(() => {
-//     const checkAuth = async () => {
-//       try {
-//         setIsLoading(true);
-//         const response = await fetch("/api/auth/me");
-//         if (!response.ok) {
-//           throw new Error("Authentication failed");
-//         }
-//         const data = await response.json();
-//         setUser(data);
-//       } catch (error) {
-//         setError("Please log in to access the dashboard");
-//         router.push("/login");
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
-
-//     checkAuth();
-//   }, [router]);
-
-//   if (isLoading) {
-//     return (
-//       <div className="flex items-center justify-center min-h-screen">
-//         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-//       </div>
-//     );
-//   }
-
-//   if (error) {
-//     return (
-//       <Alert variant="destructive">
-//         <AlertDescription>{error}</AlertDescription>
-//       </Alert>
-//     );
-//   }
-
-
-//   return (
-//     <div>
-//       <DashboardLayout>
-        
-//       </DashboardLayout>
-//     </div>
-//   );
-// }
-
-
 "use client"
 
 import { useState, useEffect } from "react"
@@ -85,63 +6,15 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Droplets, Gauge, AlertTriangle, Power, MapPin, ChevronRight, Activity, Thermometer } from "lucide-react"
-import { useRouter } from "next/navigation"
+import SectionDetail from "@/components/dashboard/section-detail"
+import { FARM_SECTIONS } from "@/lib/constants"
+import { Section } from "@/types"
+import { getMoistureStatus, calculateAverage, formatNumber } from "@/lib/utils"
 
-// Mock data for demonstration
-const farmSections = [
-  {
-    id: 1,
-    name: "Section A",
-    crop: "Tomatoes",
-    moisture: 45,
-    threshold: 40,
-    valveOpen: true,
-    waterUsed: 1250,
-    temperature: 24,
-    lastWatered: "2 hours ago",
-    flowRate: 15.2,
-  },
-  {
-    id: 2,
-    name: "Section B",
-    crop: "Lettuce",
-    moisture: 35,
-    threshold: 50,
-    valveOpen: false,
-    waterUsed: 890,
-    temperature: 22,
-    lastWatered: "4 hours ago",
-    flowRate: 0,
-  },
-  {
-    id: 3,
-    name: "Section C",
-    crop: "Carrots",
-    moisture: 60,
-    threshold: 45,
-    valveOpen: false,
-    waterUsed: 1100,
-    temperature: 26,
-    lastWatered: "1 hour ago",
-    flowRate: 0,
-  },
-  {
-    id: 4,
-    name: "Section D",
-    crop: "Peppers",
-    moisture: 30,
-    threshold: 40,
-    valveOpen: true,
-    waterUsed: 950,
-    temperature: 25,
-    lastWatered: "30 min ago",
-    flowRate: 12.8,
-  },
-]
-
-export default function Dashboard() {
-  const router = useRouter()
-  const [sections, setSections] = useState(farmSections)
+export default function DashboardPage() {
+  const [currentView, setCurrentView] = useState<"dashboard" | "section">("dashboard")
+  const [selectedSection, setSelectedSection] = useState<number | null>(null)
+  const [sections, setSections] = useState<Section[]>(FARM_SECTIONS)
   const [totalWaterUsed, setTotalWaterUsed] = useState(0)
   const [activeValves, setActiveValves] = useState(0)
 
@@ -152,15 +25,18 @@ export default function Dashboard() {
     setActiveValves(active)
   }, [sections])
 
-  const getMoistureStatus = (moisture: number, threshold: number) => {
-    if (moisture < threshold - 10)
-      return { status: "Critical", color: "destructive", bgColor: "bg-red-50 border-red-200" }
-    if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-orange-50 border-orange-200" }
-    return { status: "Optimal", color: "default", bgColor: "bg-green-50 border-green-200" }
+  const handleSectionSelect = (sectionId: number) => {
+    setSelectedSection(sectionId)
+    setCurrentView("section")
   }
 
-  const handleSectionSelect = (sectionId: number) => {
-    router.push(`/dashboard/sections/${sectionId}`)
+  const handleBackToDashboard = () => {
+    setCurrentView("dashboard")
+    setSelectedSection(null)
+  }
+
+  if (currentView === "section" && selectedSection) {
+    return <SectionDetail sectionId={selectedSection} onBack={handleBackToDashboard} />
   }
 
   return (
@@ -184,7 +60,7 @@ export default function Dashboard() {
                 <span className="text-xs md:text-sm font-medium">Total Water</span>
                 <Droplets className="h-4 w-4 text-blue-500" />
               </div>
-              <div className="text-lg md:text-2xl font-bold">{totalWaterUsed.toLocaleString()}L</div>
+              <div className="text-lg md:text-2xl font-bold">{formatNumber(totalWaterUsed)}L</div>
               <p className="text-xs text-muted-foreground">Today</p>
             </CardContent>
           </Card>
@@ -209,7 +85,7 @@ export default function Dashboard() {
                 <Gauge className="h-4 w-4 text-orange-500" />
               </div>
               <div className="text-lg md:text-2xl font-bold">
-                {Math.round(sections.reduce((sum, s) => sum + s.moisture, 0) / sections.length)}%
+                {calculateAverage(sections.map(s => s.moisture))}%
               </div>
               <p className="text-xs text-muted-foreground">All sections</p>
             </CardContent>
@@ -289,7 +165,7 @@ export default function Dashboard() {
                           <Droplets className="h-3 w-3" />
                           <span className="text-xs text-muted-foreground">Used</span>
                         </div>
-                        <div className="text-sm font-medium">{section.waterUsed}L</div>
+                        <div className="text-sm font-medium">{formatNumber(section.waterUsed)}L</div>
                       </div>
                       <div className="space-y-1">
                         <div className="flex items-center justify-center gap-1">
