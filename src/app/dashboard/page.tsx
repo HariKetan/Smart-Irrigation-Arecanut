@@ -40,8 +40,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-3 md:p-6">
-      <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
+    <div className="min-h-screen bg-background  p-3 md:p-6">
+      <div className="max-w-6xl mx-auto space-y-4 md:space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl md:text-3xl font-bold">Smart Irrigation Control</h1>

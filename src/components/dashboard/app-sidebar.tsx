@@ -89,9 +89,9 @@ export function AppSidebar() {
               !isCollapsed ? "translate-x-0" : "-translate-x-full"
             )}
           >
-            <div className="flex h-14 items-center border-b px-4">
+            {/* <div className="flex h-14 items-center border-b px-4">
               <SidebarTrigger className="-ml-1" />
-            </div>
+            </div> */}
             <div className="flex-1 overflow-auto py-2">
               <nav className="grid items-start px-2 text-sm font-medium">
                 {sidebarLinks.map((link) => {
@@ -126,14 +126,7 @@ export function AppSidebar() {
         isCollapsed ? "w-16" : "w-64"
       )}
     >
-      <div className="flex h-14 items-center border-b px-4">
-        {/* <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
-          <span className={cn("text-lg transition-opacity duration-300", isCollapsed ? "opacity-0" : "opacity-100")}>
-            Dashboard
-          </span>
-        </Link> */}
-        <SidebarTrigger className="-ml-1" />
-      </div>
+      
       <div className="flex-1 overflow-auto py-2">
         <nav className="grid items-start px-2 text-sm font-medium">
           {sidebarLinks.map((link) => {

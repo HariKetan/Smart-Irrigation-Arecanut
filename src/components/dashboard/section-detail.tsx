@@ -102,6 +102,24 @@ const sectionDetails = {
     plantingDate: "2024-03-25",
     expectedHarvest: "2024-07-25",
   },
+  5: {
+    id: 5,
+    name: "Section E",
+    crop: "Arecanut",
+    moisture: 30,
+    threshold: 40,
+    valveOpen: true,
+    waterUsed: 950,
+    temperature: 25,
+    humidity: 68,
+    lastWatered: "30 min ago",
+    flowRate: 12.8,
+    dailyUsage: [90, 110, 130, 105, 115, 95, 110],
+    weeklyTarget: 750,
+    soilPh: 6.9,
+    plantingDate: "2024-03-25",
+    expectedHarvest: "2024-07-25",
+  },
 }
 
 export default function SectionDetail({ sectionId, onBack }: SectionDetailProps) {
@@ -150,11 +168,11 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
     <div className="min-h-screen bg-background p-3 md:p-6">
       <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
         {/* Header */}
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col items-center text-center gap-3">
           <Button variant="outline" size="sm" onClick={onBack}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
-          <div className="flex-1">
+          <div className="flex flex-col items-center">
             <div className="flex items-center gap-2">
               <MapPin className="h-5 w-5" />
               <h1 className="text-xl md:text-2xl font-bold">{currentSection.name}</h1>

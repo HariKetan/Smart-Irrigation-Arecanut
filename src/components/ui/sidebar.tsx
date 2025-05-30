@@ -4,6 +4,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useMobile } from "@/hooks/use-mobile"
 
 interface SidebarContextValue {
   isCollapsed: boolean
@@ -13,7 +14,13 @@ interface SidebarContextValue {
 const SidebarContext = React.createContext<SidebarContextValue | undefined>(undefined)
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  const [isCollapsed, setIsCollapsed] = React.useState(false)
+  const isMobile = useMobile()
+  const [isCollapsed, setIsCollapsed] = React.useState(isMobile)
+
+  // Update collapsed state when mobile state changes
+  React.useEffect(() => {
+    setIsCollapsed(isMobile)
+  }, [isMobile])
 
   return (
     <SidebarContext.Provider value={{ isCollapsed, setIsCollapsed }}>
