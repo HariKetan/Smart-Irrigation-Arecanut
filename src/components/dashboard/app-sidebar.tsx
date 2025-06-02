@@ -68,7 +68,10 @@ export function AppSidebar() {
         <Button
           variant="outline"
           size="icon"
-          className="fixed top-20 left-4 z-50 rounded-full shadow-md bg-background"
+          className={cn(
+            "fixed top-20 left-4 z-50 rounded-full shadow-md bg-background transition-opacity duration-300",
+            isCollapsed ? "opacity-100" : "opacity-0 pointer-events-none"
+          )}
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <Menu className="h-4 w-4" />

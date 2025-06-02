@@ -166,7 +166,7 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
 
   return (
     <div className="min-h-screen bg-background p-3 md:p-6">
-      <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
+      <div className="max-w-7xl mx-auto space-y-4 md:space-y-6">
         {/* Header */}
         <div className="flex flex-col items-center text-center gap-3">
           <Button variant="outline" size="sm" onClick={onBack}>
