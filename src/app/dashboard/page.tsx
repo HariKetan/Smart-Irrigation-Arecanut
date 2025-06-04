@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
-import { Droplets, Gauge, AlertTriangle, Power, MapPin, ChevronRight, Activity, Thermometer } from "lucide-react"
+import { Droplets, Gauge, AlertTriangle, Power, MapPin, ChevronRight, Activity, Thermometer, CheckCircle } from "lucide-react"
 import SectionDetail from "@/components/dashboard/section-detail"
 import { FARM_SECTIONS } from "@/lib/constants"
 import { Section } from "@/types"
@@ -182,12 +182,42 @@ export default function DashboardPage() {
                     </div>
 
                     {/* Alert if needed */}
-                    {section.moisture < section.threshold && (
+                    {/* {section.moisture < section.threshold && (
                       <div className="flex items-center gap-2 p-2 bg-orange-100 border border-orange-200 rounded-lg dark:bg-orange-100 dark:border-orange-200">
                         <AlertTriangle className="h-3 w-3 text-orange-600 dark:text-orange-600" />
                         <span className="text-xs text-orange-700 dark:text-orange-700">Needs immediate attention</span>
                       </div>
-                    )}
+                    )} */}
+
+
+                    {/* Status Alert */}
+        {section.moisture < section.threshold ? (
+          <Card className="border-orange-200 bg-orange-50">
+            <CardContent className="pt-0">
+              <div className="flex items-center gap-3">
+                <AlertTriangle className="h-5 w-5 text-orange-600" />
+                <div>
+                  <div className="font-medium text-orange-800">Action Required</div>
+                  <div className="text-sm text-orange-700">
+                    Soil moisture is below the set threshold. Consider starting irrigation.
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card className="border-green-200 bg-green-50">
+            <CardContent className="pt-0">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <div>
+                  <div className="font-medium text-green-800">Optimal Conditions</div>
+                  <div className="text-sm text-green-700">Soil moisture level is within the optimal range.</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
                   </CardContent>
                 </Card>
               )

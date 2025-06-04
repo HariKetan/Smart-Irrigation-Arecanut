@@ -7,9 +7,9 @@ export function cn(...classes: (string | undefined | null | false)[]) {
 
 export const getMoistureStatus = (moisture: number, threshold: number) => {
   if (moisture < threshold - 10)
-    return { status: "Critical", color: "destructive", bgColor: "bg-red-200 border-red-200" }
-  if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-yellow-100 border-orange-200" }
-  return { status: "Optimal", color: "default", bgColor: "bg-green-200 border-green-200" }
+    return { status: "Critical", color: "destructive", bgColor: "bg-red-200 border-red-300" }
+  if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-yellow-100 border-orange-300" }
+  return { status: "Optimal", color: "default", bgColor: "bg-green-200 border-green-300" }
 }
 
 export const calculateAverage = (numbers: number[]): number => {

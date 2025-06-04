@@ -157,9 +157,9 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
 
   const getMoistureStatus = (moisture: number, threshold: number) => {
     if (moisture < threshold - 10)
-      return { status: "Critical", color: "destructive", bgColor: "bg-red-50 border-red-200" }
-    if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-orange-50 border-orange-200" }
-    return { status: "Optimal", color: "default", bgColor: "bg-green-50 border-green-200" }
+      return { status: "Critical", color: "destructive", bgColor: "bg-red-200 border-red-200" }
+    if (moisture < threshold) return { status: "Low", color: "secondary", bgColor: "bg-yellow-100 border-orange-200" }
+    return { status: "Optimal", color: "default", bgColor: "bg-green-200 border-green-200" }
   }
 
   const moistureStatus = getMoistureStatus(currentSection.moisture, currentSection.threshold)
@@ -211,7 +211,7 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
             </div>
 
             {/* Environmental Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {/* <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 bg-background rounded-lg">
                 <Thermometer className="h-4 w-4 mx-auto mb-1 text-orange-500" />
                 <div className="text-sm text-muted-foreground">Temperature</div>
@@ -232,7 +232,7 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
                 <div className="text-sm text-muted-foreground">Last Watered</div>
                 <div className="text-lg font-semibold">{currentSection.lastWatered}</div>
               </div>
-            </div>
+            </div> */}
           </CardContent>
         </Card>
 
@@ -368,7 +368,7 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
         </Card>
 
         {/* Status Alert */}
-        {currentSection.moisture < currentSection.threshold ? (
+        {/* {currentSection.moisture < currentSection.threshold ? (
           <Card className="border-orange-200 bg-orange-50">
             <CardContent className="pt-6">
               <div className="flex items-center gap-3">
@@ -394,7 +394,7 @@ export default function SectionDetail({ sectionId, onBack }: SectionDetailProps)
               </div>
             </CardContent>
           </Card>
-        )}
+        )} */}
       </div>
     </div>
   )
