@@ -48,7 +48,7 @@ export default function DashboardPage() {
           <p className="text-sm text-muted-foreground">Monitor and control your farm's irrigation system</p>
           <Badge variant="outline" className="flex items-center gap-1 w-fit mx-auto">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            System Online
+            System Offline
           </Badge>
         </div>
 
