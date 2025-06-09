@@ -6,6 +6,7 @@ RUN npm install
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED 1
 ENV NEXT_DISABLE_ESLINT 1
+ENV DISABLE_ESLINT_PLUGIN true
 RUN npm run build
 
 # Production stage
